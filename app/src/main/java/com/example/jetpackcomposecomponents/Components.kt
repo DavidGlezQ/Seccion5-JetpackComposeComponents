@@ -10,7 +10,9 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Clear
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.Notifications
+import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.BlurredEdgeTreatment
 import androidx.compose.ui.draw.blur
@@ -21,6 +23,8 @@ import androidx.compose.ui.graphics.Shadow
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.buildAnnotatedString
@@ -57,6 +61,57 @@ fun Components() {
             NewChip()
             CustomDivider()
             NewButton()
+            CustomDivider()
+            NewBadge()
+            CustomDivider()
+            NewChecks()
+        }
+    }
+}
+
+@Composable
+fun NewChecks() {
+    Row(verticalAlignment = Alignment.CenterVertically) {
+        var isCheckboxChecked by remember { mutableStateOf(false) }
+        Checkbox(checked = isCheckboxChecked, onCheckedChange = { isCheckboxChecked = it })
+        Text(text = "Terminos y condiciones")
+
+        Spacer(modifier = Modifier.weight(1f))
+
+        var isSwitchChecked by remember { mutableStateOf(false) }
+        Text(text = "Anuncios")
+        Switch(checked = isSwitchChecked, onCheckedChange = { isSwitchChecked = it })
+    }
+}
+
+@Composable
+fun NewBadge() {
+    Row(horizontalArrangement = Arrangement.spacedBy(16.dp),
+        verticalAlignment = Alignment.CenterVertically) {
+        BadgedBox(badge = {
+            Badge {
+                val badgeNumber = "5"
+                Text(
+                    text = badgeNumber,
+                    modifier = Modifier.semantics { contentDescription = "$badgeNumber items"})
+            }
+        }) {
+            Icon(imageVector = Icons.Filled.ShoppingCart, contentDescription = "Cart")
+        }
+
+        OutlinedButton(onClick = { }) {
+            Text(text = "View Cart")
+            Spacer(modifier = Modifier.size(ButtonDefaults.IconSpacing))
+            BadgedBox(badge = {
+                Badge {
+                    val badgeNumber = "5"
+                    Text(
+                        text = badgeNumber,
+                        modifier = Modifier.semantics { contentDescription = "$badgeNumber items"})
+                }
+            }) {
+                Icon(imageVector = Icons.Filled.ShoppingCart, contentDescription = "Cart")
+            }
         }
     }
 }
