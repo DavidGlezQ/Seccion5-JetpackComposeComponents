@@ -1,3 +1,5 @@
 <resources>
-    <string name="app_name">JetpackComposeComponents</string>
+    <string name="app_name" translatable="false">JetpackComposeComponents</string>
+    <string name="lifecycle">Lifecycle</string>
+    <string name="test">test</string>
 </resources>
