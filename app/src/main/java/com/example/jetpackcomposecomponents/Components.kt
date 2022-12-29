@@ -8,6 +8,8 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Clear
+import androidx.compose.material.icons.filled.Close
+import androidx.compose.material.icons.filled.Notifications
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.BlurredEdgeTreatment
@@ -51,7 +53,45 @@ fun Components() {
             NewTextFieldOutLine()
             CustomDivider()
             NewImageView()
+            CustomDivider()
+            NewChip()
+            CustomDivider()
+            NewButton()
         }
+    }
+}
+
+@Composable
+fun NewButton() {
+    Row(horizontalArrangement = Arrangement.spacedBy(16.dp)) {
+        Button(onClick = { }) { Text(text = "Finish") }
+        Button(onClick = { }) {
+            //Nota: si quieres cambiar el orden del icono solo es mover el orden de las propiedades
+            Text(text = "Send")
+            Spacer(modifier = Modifier.size(ButtonDefaults.IconSpacing))
+            Icon(imageVector = Icons.Filled.Close, contentDescription = null,
+                modifier = Modifier.size(ButtonDefaults.IconSize))
+        }
+        OutlinedButton(onClick = { }) { Text(text = "Back") }
+        TextButton(onClick = { }) { Text(text = "LogOut") }
+    }
+}
+
+@OptIn(ExperimentalMaterialApi::class)
+@Composable
+fun NewChip() {
+    Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+        Chip(onClick = {}) { Text(text = "Etiqueta") }
+        Chip(onClick = {}, leadingIcon = {
+            Icon(imageVector = Icons.Filled.Notifications, contentDescription = "Delete Tag",
+                modifier = Modifier.padding(start = 4.dp))
+        }) {
+            Text(text = "Etiqueta")
+            Icon(imageVector = Icons.Filled.Close, contentDescription = "Delete Tag",
+                modifier = Modifier.padding(start = 16.dp))
+        }
+        Chip(onClick = {}, border = ChipDefaults.outlinedBorder,
+            colors = ChipDefaults.outlinedChipColors()) { Text(text = "Etiqueta") }
     }
 }
 
